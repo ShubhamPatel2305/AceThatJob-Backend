@@ -41,5 +41,18 @@ namespace AceThatJob.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
             }
         }
+
+        [HttpPost, Route("addnewuser")]
+        public HttpResponseMessage AddNewAppuser([FromBody] AppUser appuser)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "api is fine");
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
+            }
+        }
     }
 }
