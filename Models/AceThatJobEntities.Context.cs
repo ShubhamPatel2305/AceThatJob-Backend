@@ -26,5 +26,6 @@ namespace AceThatJob.Models
         }
     
         public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

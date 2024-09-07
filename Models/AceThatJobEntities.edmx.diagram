@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6af725056af949d28e95eb821f40d63f" Name="Diagram1">
         <EntityTypeShape EntityType="AceThatJobModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AceThatJobModel.Category" Width="1.5" PointX="4.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -209,6 +209,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AppuserController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="CustomAuthenticationFilter.cs" />
@@ -231,6 +232,9 @@
       <DependentUpon>AceThatJobEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AppUser.cs">
+      <DependentUpon>AceThatJobEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
       <DependentUpon>AceThatJobEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TokenClaim.cs" />

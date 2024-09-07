@@ -11,7 +11,15 @@
     <Property Name="status" Type="varchar" MaxLength="20" />
     <Property Name="isDeletable" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="AceThatJobModelStoreContainer">
     <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
