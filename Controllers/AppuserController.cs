@@ -58,8 +58,36 @@ namespace AceThatJob.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, new { message = "User added successfully" });
                 }
                 else
-                {
+                {   
                     return Request.CreateResponse(HttpStatusCode.Conflict, new { message = "User already exists" });
+                }
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
+            }
+        }
+
+        [HttpGet, Route("getallusers")]
+        [CustomAuthenticationFilter]
+        public HttpResponseMessage GetAllAppusers()
+        {
+            try
+            {
+                var token = Request.Headers.GetValues("authorization").First();
+                TokenClaim claim = TokenManager.ValidateToken(token);
+                if (claim.isDeletable == "False")
+                {
+                    //return all users except the one who is not deletable
+                    var result = db.AppUsers.Select(x => new { x.id, x.name, x.email, x.status, x.isDeletable }).Where(x => (x.email != claim.email) && (x.isDeletable == "True")).ToList();
+                    return Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                else
+                {
+                    //return all users except the one who is not deletable and the one who is logged in
+                    var result = db.AppUsers.Select(x => new { x.id, x.name, x.email, x.status, x.isDeletable }).Where(x => (x.email != claim.email)&&(x.isDeletable=="True")).ToList();
+                    return Request.CreateResponse(HttpStatusCode.OK, result);
+
                 }
             }
             catch (Exception e)
