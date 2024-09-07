@@ -43,6 +43,7 @@ namespace AceThatJob.Controllers
         }
 
         [HttpPost, Route("addnewuser")]
+        [CustomAuthenticationFilter] //this will make it so that the user must be authenticated to access this route
         public HttpResponseMessage AddNewAppuser([FromBody] AppUser appuser)
         {
             try
