@@ -14,6 +14,7 @@
   <EntityContainer Name="AceThatJobEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
     <EntitySet Name="Categories" EntityType="AceThatJobModel.Category" />
+    <EntitySet Name="Articles" EntityType="AceThatJobModel.Article" />
   </EntityContainer>
   <EntityType Name="Category">
     <Key>
@@ -21,5 +22,16 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="categoryID" Type="Int32" Nullable="false" />
+    <Property Name="publication_date" Type="DateTime" Precision="0" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

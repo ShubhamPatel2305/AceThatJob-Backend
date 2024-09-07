@@ -67,6 +67,8 @@ namespace AceThatJob.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
             }
-        }   
+        }
+
+        
     }
 }
