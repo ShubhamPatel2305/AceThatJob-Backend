@@ -41,5 +41,31 @@ namespace AceThatJob.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
             }
         }
+
+        [HttpPost, Route("addnewuser")]
+        [CustomAuthenticationFilter] //this will make it so that the user must be authenticated to access this route
+        public HttpResponseMessage AddNewAppuser([FromBody] AppUser appuser)
+        {
+            try
+            {
+                AppUser obj = db.AppUsers.Where(x => x.email == appuser.email).FirstOrDefault();
+                if (obj == null)
+                {
+                    appuser.status= "False";
+                    appuser.isDeletable = "True";
+                    db.AppUsers.Add(appuser);
+                    db.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK, new { message = "User added successfully" });
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.Conflict, new { message = "User already exists" });
+                }
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
+            }
+        }
     }
 }
