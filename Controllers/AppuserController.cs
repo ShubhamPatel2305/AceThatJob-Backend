@@ -95,5 +95,49 @@ namespace AceThatJob.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
             }
         }
+
+        [HttpPost, Route("updateuserstatus")]
+        [CustomAuthenticationFilter]
+        public HttpResponseMessage UpdateUserStatus([FromBody] AppUser appuser)
+        {
+            try
+            {
+
+               AppUser obj=db.AppUsers.FirstOrDefault(x => x.id == appuser.id && x.isDeletable=="True");
+                if (obj == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { message = "User not found" });
+                }
+                obj.status = appuser.status;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "User status updated successfully" });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
+            }
+        }
+
+        [HttpPost, Route("updateuser")]
+        [CustomAuthenticationFilter]
+        public HttpResponseMessage UpdateUser([FromBody] AppUser appuser)
+        {
+            try
+            {
+                AppUser obj = db.AppUsers.FirstOrDefault(x => x.id == appuser.id && x.isDeletable == "True");
+                if (obj == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { message = "User not found" });
+                }
+                obj.name = appuser.name;
+                obj.email = appuser.email;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "User updated successfully" });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { message = "An error occurred", error = e.Message });
+            }
+        }
     }
 }

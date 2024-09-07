@@ -13,5 +13,13 @@
   </EntityType>
   <EntityContainer Name="AceThatJobEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
+    <EntitySet Name="Categories" EntityType="AceThatJobModel.Category" />
   </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>
