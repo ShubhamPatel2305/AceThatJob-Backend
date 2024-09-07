@@ -48,7 +48,19 @@ namespace AceThatJob.Controllers
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, "api is fine");
+                AppUser obj = db.AppUsers.Where(x => x.email == appuser.email).FirstOrDefault();
+                if (obj == null)
+                {
+                    appuser.status= "False";
+                    appuser.isDeletable = "True";
+                    db.AppUsers.Add(appuser);
+                    db.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK, new { message = "User added successfully" });
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.Conflict, new { message = "User already exists" });
+                }
             }
             catch (Exception e)
             {
